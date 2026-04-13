@@ -24,7 +24,7 @@ spec:
           helm:
             valueFiles:
               - $values/{{path}}/values.yaml
-        - repoURL: https://github.com/vedantaggrawal/repo-platform.git
+        - repoURL: https://github.com/vedantaggrawal/repo-app-gitops.git
           targetRevision: HEAD
           ref: values
       destination:
