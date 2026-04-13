@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prod-apps-onboarding
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/vedantaggrawal/repo-app-gitops.git
+        revision: main
+        directories:
+          - path: 'apps/*/prod'
+  template:
+    metadata:
+      name: 'prod-{{path[1]}}'
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/vedantaggrawal/repo-helm-chart.git
+          path: .
+          targetRevision: HEAD
+          helm:
+            valueFiles:
+              - $values/{{path}}/values.yaml
+        - repoURL: https://github.com/vedantaggrawal/repo-app-gitops.git
+          targetRevision: main
+          ref: values
+      destination:
+        # NOTE: Update to your real Production cluster API endpoint
+        server: https://kubernetes.prod.svc 
+        namespace: '{{path[1]}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
