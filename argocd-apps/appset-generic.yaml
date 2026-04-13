@@ -5,16 +5,22 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/vedantaggrawal/repo-app-gitops.git
-        revision: HEAD
-        directories:
-          - path: 'apps/*/*'
+    # Cross-reference parsed directory names with explicitly labeled target clusters
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/vedantaggrawal/repo-app-gitops.git
+              revision: HEAD
+              directories:
+                - path: 'apps/*/*'
+          - clusters:
+              selector:
+                matchLabels:
+                  environment: '{{path.basename}}'
   template:
     metadata:
-      # Pattern matches: apps/APPNAME/ENVNAME
-      # path[1] is APPNAME, path.basename is ENVNAME
-      name: '{{path[1]}}-{{path.basename}}'
+      # Creates deterministic App names like 'dev-devops-test-webserver'
+      name: '{{path.basename}}-{{path[1]}}'
     spec:
       project: default
       sources:
@@ -28,8 +34,9 @@ spec:
           targetRevision: HEAD
           ref: values
       destination:
-        server: https://kubernetes.default.svc
-        namespace: '{{path[1]}}-{{path.basename}}'
+        # Dynamically bound target cluster properties inherently preventing cross-env leakage
+        server: '{{server}}'
+        namespace: '{{path[1]}}'
       syncPolicy:
         automated:
           prune: true
