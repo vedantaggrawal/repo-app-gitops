@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  tag: "1.0.0-dev"
+  tag: "sha-2eda80b"
 
 envVariables:
   ENV: "development"
