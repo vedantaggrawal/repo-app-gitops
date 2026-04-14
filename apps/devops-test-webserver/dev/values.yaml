@@ -3,6 +3,9 @@ replicaCount: 1
 image:
   tag: "sha-2eda80b"
 
+imagePullSecrets:
+  - name: ghcr-pull-secret
+
 envVariables:
   ENV: "development"
   LOG_LEVEL: "debug"
