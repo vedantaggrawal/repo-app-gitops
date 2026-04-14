@@ -13,6 +13,7 @@ envVariables:
 
 ingress:
   enabled: true
+  className: nginx
   hosts:
     - host: dev.webserver.internal
       paths:
