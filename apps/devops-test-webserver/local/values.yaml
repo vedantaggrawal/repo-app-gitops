@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/vedantaggrawal/repo-app
+  tag: "sha-d9b12d1"
+
+imagePullSecrets:
+  - name: ghcr-pull-secret
+
+envVariables:
+  ENV: "local"
+  LOG_LEVEL: "debug"
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: local.webserver.internal
+      paths:
+        - path: /
+          pathType: Prefix
