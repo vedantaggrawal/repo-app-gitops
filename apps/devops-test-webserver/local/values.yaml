@@ -13,7 +13,7 @@ envVariables:
 
 ingress:
   enabled: true
-  className: nginx
+  className: traefik
   hosts:
     - host: local.webserver.internal
       paths:
