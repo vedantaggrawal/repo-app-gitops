@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/vedantaggrawal/repo-app
+  repository: ghcr.io/vedantaggrawal/repo-app-release
   tag: "v1.0.2"
 
 imagePullSecrets:
