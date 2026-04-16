@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/vedantaggrawal/repo-app
-  tag: "sha-d9b12d1"
+  tag: "v1.0.2"
 
 imagePullSecrets:
   - name: ghcr-pull-secret
