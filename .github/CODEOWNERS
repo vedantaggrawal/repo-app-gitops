@@ -1,0 +1,8 @@
+# Default: any change requires at least one review
+* @vedantaggrawal
+
+# Staging changes require explicit approval
+apps/*/stg/ @vedantaggrawal
+
+# Prod changes require explicit approval — no self-merge
+apps/*/prod/ @vedantaggrawal
