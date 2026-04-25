@@ -13,7 +13,7 @@ envVariables:
 
 ingress:
   enabled: true
-  className: traefik
+  className: cilium
   hosts:
     - host: local.webserver.internal
       paths:
