@@ -11,11 +11,6 @@ envVariables:
   ENV: "local"
   LOG_LEVEL: "debug"
 
+# Ingress disabled: no ingress controller in this cluster
 ingress:
-  enabled: true
-  className: cilium
-  hosts:
-    - host: local.webserver.internal
-      paths:
-        - path: /
-          pathType: Prefix
+  enabled: false
