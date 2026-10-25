@@ -11,11 +11,6 @@ envVariables:
   ENV: "development"
   LOG_LEVEL: "debug"
 
+# Ingress disabled: no ingress controller in this cluster
 ingress:
-  enabled: true
-  className: nginx
-  hosts:
-    - host: dev.webserver.internal
-      paths:
-        - path: /
-          pathType: Prefix
+  enabled: false
